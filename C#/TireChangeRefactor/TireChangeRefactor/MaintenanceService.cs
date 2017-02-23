@@ -25,10 +25,9 @@ namespace TireChangeRefactor
 
 			var repo = new DAL.AircraftRepository();
 			var allAircraft = repo.GetAll().ToArray();
-			var requiresTireChange = new List<AircraftModel>();
 			if (allAircraft != null)
 			{
-				requiresTireChange = allAircraft.Where((aircraft) =>
+				return allAircraft.Where((aircraft) =>
 				{
 					if (aircraft != null)
 					{
@@ -38,10 +37,10 @@ namespace TireChangeRefactor
 						|| (aircraft.Manufacturer == "BazPlane" && landingCount >= 200);
 					}
 					return false;
-				}).ToList<AircraftModel>();
+				}).ToArray();
 			}
 
-			return requiresTireChange.ToArray();
+			return new List<AircraftModel>().ToArray();
 		}
 	}
 }
