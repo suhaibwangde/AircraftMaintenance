@@ -1,4 +1,4 @@
-(function () {
+(() => {
     'use strict';
     
     // There are 3 aircraft manufactures, each with different requirements 
@@ -9,12 +9,12 @@
 
     // Based on the above information and the data available in the data.js file,
     //  this function is supposed to return an array of aircrafts due for a tire change.
-    function getAircraftsDueForTireChange(allAircraftData) {
-        var aircraftDueForTireChanges = [];
+    const  getAircraftsDueForTireChange = (allAircraftData) => {
+        const aircraftDueForTireChanges = [];
         if(allAircraftData) {
             allAircraftData.map((aircraft) => {
                 if(aircraft) {
-                    var landingsSinceLastTireChange = 0;
+                    let landingsSinceLastTireChange = 0;
                     aircraft.landings.map((landing) => {
                         if (landing && landing >= aircraft.lastTireChange)
                             landingsSinceLastTireChange++;
@@ -35,9 +35,9 @@
     //  To keep things simple, we are just going to check the ids and display a pass/fail.
     //  Feel free to use Jasmine or any other test framework if you're more comfortable with that,
     //  but it is NOT required.  This should be a quick exercise.
-    var expected = [1, 3, 5];
-    var actual = getAircraftsDueForTireChange(window.CAMP.aircraftData).map((aircraft) => aircraft.id).sort();
-    var passed = (JSON.stringify(expected) === JSON.stringify(actual));
+    const expected = [1, 3, 5];
+    const actual = getAircraftsDueForTireChange(window.CAMP.aircraftData).map((aircraft) => aircraft.id).sort();
+    const passed = (JSON.stringify(expected) === JSON.stringify(actual));
 
     document.body.innerHTML += passed ? 'PASS' : 'FAIL';
     document.body.innerHTML += '<br />';
