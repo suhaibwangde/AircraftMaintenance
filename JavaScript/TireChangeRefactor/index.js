@@ -10,25 +10,18 @@
     // Based on the above information and the data available in the data.js file,
     //  this function is supposed to return an array of aircrafts due for a tire change.
     const  getAircraftsDueForTireChange = (allAircraftData) => {
-        const aircraftDueForTireChanges = [];
         if(allAircraftData) {
-            allAircraftData.map((aircraft) => {
+            return allAircraftData.filter((aircraft) => {
                 if(aircraft) {
-                    let landingsSinceLastTireChange = 0;
-                    aircraft.landings.map((landing) => {
-                        if (landing && landing >= aircraft.lastTireChange)
-                            landingsSinceLastTireChange++;
-                    });
-                    if (aircraft.manufacturer === 'FooPlane' && landingsSinceLastTireChange >= 120)
-                        aircraftDueForTireChanges.push(aircraft);
-                    else if (aircraft.manufacturer === 'BarPlane' && landingsSinceLastTireChange >= 75)
-                        aircraftDueForTireChanges.push(aircraft);
-                    else if (aircraft.manufacturer === 'BazPlane' && landingsSinceLastTireChange >= 200)
-                        aircraftDueForTireChanges.push(aircraft);  
+                    const landingsSinceLastTireChange = aircraft.landings.filter((landing) => landing && landing >= aircraft.lastTireChange).length;
+                   return (aircraft.manufacturer === 'FooPlane' && landingsSinceLastTireChange >= 120)
+                    || (aircraft.manufacturer === 'BarPlane' && landingsSinceLastTireChange >= 75)
+                    || (aircraft.manufacturer === 'BazPlane' && landingsSinceLastTireChange >= 200) 
                 }
+                return false;
             });
         }
-        return aircraftDueForTireChanges;
+        return [];
     }
 
     // Test the function 

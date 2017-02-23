@@ -28,20 +28,17 @@ namespace TireChangeRefactor
 			var requiresTireChange = new List<AircraftModel>();
 			if (allAircraft != null)
 			{
-				allAircraft.ToList().ForEach((aircraft) =>
+				requiresTireChange = allAircraft.Where((aircraft) =>
 				{
-					var landings = new List<DateTime>();
 					if (aircraft != null)
 					{
 						var landingCount = aircraft.Landings.Count(L => L != null && L >= aircraft.LastTireChange);
-						if (aircraft.Manufacturer == "FooPlane" && landingCount >= 120)
-							requiresTireChange.Add(aircraft);
-						else if (aircraft.Manufacturer == "BarPlane" && landingCount >= 75)
-							requiresTireChange.Add(aircraft);
-						else if (aircraft.Manufacturer == "BazPlane" && landingCount >= 200)
-							requiresTireChange.Add(aircraft);
+						return (aircraft.Manufacturer == "FooPlane" && landingCount >= 120)
+						|| (aircraft.Manufacturer == "BarPlane" && landingCount >= 75)
+						|| (aircraft.Manufacturer == "BazPlane" && landingCount >= 200);
 					}
-				});
+					return false;
+				}).ToList<AircraftModel>();
 			}
 
 			return requiresTireChange.ToArray();
