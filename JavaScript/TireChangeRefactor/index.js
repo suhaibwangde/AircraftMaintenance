@@ -14,7 +14,7 @@
             return allAircraftData.filter((aircraft) => {
                 if(aircraft) {
                     const landingsSinceLastTireChange = aircraft.landings.filter((landing) => landing && landing >= aircraft.lastTireChange).length;
-                   return (aircraft.manufacturer === 'FooPlane' && landingsSinceLastTireChange >= 120)
+                    return (aircraft.manufacturer === 'FooPlane' && landingsSinceLastTireChange >= 120)
                     || (aircraft.manufacturer === 'BarPlane' && landingsSinceLastTireChange >= 75)
                     || (aircraft.manufacturer === 'BazPlane' && landingsSinceLastTireChange >= 200) 
                 }
